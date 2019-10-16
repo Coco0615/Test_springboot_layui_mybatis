@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pc.dao.CategoryDAO">
+    <resultMap id="category_res" type="com.pc.entity.Category">
+        <id property="category_id" column="category_id"/>
+        <result property="parent_id" column="parent_id"/>
+        <result property="category_name" column="category_name"/>
+        <result property="count" column="count"/>
+        <result property="category_type" column="category_type"/>
+        <collection property="products" javaType="list" ofType="com.pc.entity.Product">
+            <id property="book_id" column="book_id"/>
+            <result property="cid" column="cid"/>
+            <result property="book_name" column="book_name"/>
+            <result property="book_price" column="book_price"/>
+            <result property="groundingDate" column="groundingDate"/>
+            <result property="book_state" column="book_state"/>
+            <result property="inventory" column="inventory"/>
+            <result property="author" column="author"/>
+            <result property="press" column="press"/>
+            <result property="editNum" column="editNum"/>
+            <result property="print_date" column="print_date"/>
+            <result property="print_count" column="print_count"/>
+            <result property="isbn" column="ISBN"/>
+            <result property="word_count" column="word_count"/>
+            <result property="page_count" column="page_count"/>
+            <result property="styles" column="style"/>
+            <result property="page" column="page"/>
+            <result property="pack" column="pack"/>
+            <result property="salenum" column="salenum"/>
+            <result property="custome_score" column="custome_score"/>
+            <result property="recommend" column="recommend"/>
+            <result property="messages" column="messages"/>
+            <result property="author_msg" column="author_msg"/>
+            <result property="list" column="list"/>
+            <result property="media_comment" column="media_comment"/>
+            <result property="imagePath" column="imagePath"/>
+            <result property="series_name" column="series_name"/>
+            <result property="dangprice" column="Dangprice"/>
+            <result property="product_image" column="product_image"/>
+        </collection>
+    </resultMap>
+    <select id="select" resultMap="category_res">
+        select c1.category_id,c1.category_name,c2.category_name category_type,count(c1.category_id) count
+        from dd_category c1 inner join dd_category c2
+        on c1.parent_id=c2.category_id left join dd_product p
+        on p.cid=c1.category_id
+        group by c1.parent_id
+    </select>
+    <select id="select1" resultMap="category_res">
+        select * from dd_category where parent_id is null
+    </select>
+    <select id="selectById" resultMap="category_res">
+        select * from dd_category where parent_id = #{id}
+    </select>
+
+</mapper>

@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <script src="layui/layui.js"></script>
+<body>
+<!--===========主页面  start===================-->
+<div class="layui-container">
+    <div class="layui-row">
+        <div style="height: 100px"></div>
+        <div class="layui-col-md12">
+<table id="productTable" lay-filter="productfilter"></table>
+        </div>
+    </div>
+</div>
+
+<!--===========主页面  end===================-->
+<!--=================弹框表单 start=================-->
+<form class="layui-form" id="productForm" lay-filter="productForm" style="display: none">
+    <div class="layui-form-item" >
+        <input type="hidden" name="book_id"/>
+        <label class="layui-form-label">书名</label>
+        <div class="layui-input-inline">
+            <input type="text" name="book_name" placeholder="请输入书名" class="layui-input">
+        </div>
+        <label class="layui-form-label">种类1</label>
+        <div class="layui-input-inline">
+            <select name="111" id="sel1" class="layui-input" lay-filter="sel1Filter">
+
+            </select>
+        </div>
+        <label class="layui-form-label">种类2</label>
+        <div class="layui-input-inline">
+            <select name="cid" id="sel" class="layui-input">
+
+            </select>
+        </div>
+        <label class="layui-form-label">价格</label>
+        <div class="layui-input-inline">
+            <input type="text" name="book_price"  placeholder="请输入文本" class="layui-input"/>
+        </div>
+    </div>
+    <div class="layui-form-item" >
+        <label class="layui-form-label">groundingDate</label>
+        <div class="layui-input-inline">
+            <input type="text" name="groundingDate" id="gdate"  placeholder="请输入文本" class="layui-input"/>
+        </div>
+        <label class="layui-form-label">状态</label>
+        <div class="layui-input-inline">
+            <input type="text" name="book_state"  placeholder="请输入文本" class="layui-input"/>
+        </div>
+        <label class="layui-form-label">存货</label>
+        <div class="layui-input-inline">
+            <input type="text" name="inventory"   placeholder="请输入文本" class="layui-input"/>
+        </div>
+        <label class="layui-form-label">作者</label>
+        <div class="layui-input-inline">
+            <input type="text" name="author"  placeholder="请输入文本" class="layui-input"/>
+        </div>
+    </div>
+    <div class="layui-form-item" >
+
+        <label class="layui-form-label">出版社</label>
+        <div class="layui-input-inline">
+            <input type="text" name="press"  placeholder="请输入文本" class="layui-input"/>
+        </div>
+        <label class="layui-form-label">editNum</label>
+        <div class="layui-input-inline">
+            <input type="text" name="editNum"  placeholder="请输入文本" class="layui-input"/>
+        </div>
+        <label class="layui-form-label">出版时间</label>
+        <div class="layui-input-inline">
+            <input type="text" name="print_date" id="pdate" placeholder="请输入文本" class="layui-input"/>
+        </div>
+        <label class="layui-form-label">print_count</label>
+        <div class="layui-input-inline">
+            <input type="text" name="print_count" placeholder="请输入文本" class="layui-input"/>
+        </div>
+    </div>
+
+
+    <div class="layui-form-item" >
+        <label class="layui-form-label">isbn</label>
+        <div class="layui-input-inline">
+            <input type="text" name="isbn" placeholder="请输入文本" class="layui-input"/>
+        </div>
+        <label class="layui-form-label">字数</label>
+        <div class="layui-input-inline">
+            <input type="text" name="word_count" placeholder="请输入文本" class="layui-input"/>
+        </div>
+        <label class="layui-form-label">页数</label>
+        <div class="layui-input-inline">
+            <input type="text" name="page_count" placeholder="请输入文本" class="layui-input"/>
+        </div>
+        <label class="layui-form-label">开数</label>
+        <div class="layui-input-inline">
+            <input type="text" name="styles"  placeholder="请输入文本" class="layui-input"/>
+        </div>
+    </div>
+
+    <div class="layui-form-item" >
+
+        <label class="layui-form-label">纸质</label>
+        <div class="layui-input-inline">
+            <input type="text" name="page"  placeholder="请输入文本" class="layui-input"/>
+        </div>
+        <label class="layui-form-label">版样</label>
+        <div class="layui-input-inline">
+            <input type="text" name="pack" placeholder="请输入文本" class="layui-input"/>
+        </div>
+        <label class="layui-form-label">已卖</label>
+        <div class="layui-input-inline">
+            <input type="text" name="salenum" placeholder="请输入文本" class="layui-input"/>
+        </div>
+        <label class="layui-form-label">custome_score</label>
+        <div class="layui-input-inline">
+            <input type="text" name="custome_score" placeholder="请输入文本" class="layui-input"/>
+        </div>
+    </div>
+
+    <div class="layui-form-item" >
+
+        <label class="layui-form-label">推荐</label>
+        <div class="layui-input-inline">
+            <input type="text" name="recommend"  placeholder="请输入文本" class="layui-input"/>
+        </div>
+        <label class="layui-form-label">信息</label>
+        <div class="layui-input-inline">
+            <input type="text" name="messages" placeholder="请输入文本" class="layui-input"/>
+        </div>
+        <label class="layui-form-label">作者信息</label>
+        <div class="layui-input-inline">
+            <input type="text" name="author_msg"  placeholder="请输入文本" class="layui-input"/>
+        </div>
+        <label class="layui-form-label">目录</label>
+        <div class="layui-input-inline">
+            <input type="text" name="list"  placeholder="请输入文本" class="layui-input"/>
+        </div>
+    </div>
+    <div class="layui-form-item" >
+        <label class="layui-form-label">媒体评论</label>
+        <div class="layui-input-inline">
+            <input type="text" name="media_comment"  placeholder="请输入文本" class="layui-input"/>
+        </div>
+        <label class="layui-form-label">图片路径</label>
+        <div class="layui-input-inline">
+            <input type="text" name="imagePath"  placeholder="请输入文本" class="layui-input"/>
+        </div>
+        <label class="layui-form-label">series_name</label>
+        <div class="layui-input-inline">
+            <input type="text" name="series_name" placeholder="请输入文本" class="layui-input"/>
+        </div>
+        <label class="layui-form-label">当当价</label>
+        <div class="layui-input-inline">
+            <input type="text" name="dangprice" placeholder="请输入文本" class="layui-input"/>
+        </div>
+    </div>
+    <div class="layui-form-item" >
+        <label class="layui-form-label">图片</label>
+        <div class="layui-input-inline">
+            <input type="hidden" name="product_image"/>
+            <button type="button" class="layui-btn" id="test1">
+                <i class="layui-icon">&#xe67c;</i>上传图片
+            </button>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="add" id="update">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+<!--=================弹框表单 end=================-->
+
+<!--==============删除、修改工具栏  start================-->
+<script type="text/html" id="du">
+    <a lay-event="delete" class="layui-btn layui-btn-danger layui-btn-xs">删除</a>
+    <a lay-event="update" class="layui-btn layui-btn-xs">修改</a>
+</script>
+<!--==============删除、修改工具栏  end================-->
+<!--==============表头工具栏  start=================-->
+<script type="text/html" id="ad">
+    <a lay-event="add" class="layui-btn layui-btn-sm">添加</a>
+    <a lay-event="deleteMany" class="layui-btn layui-btn-danger layui-btn-sm">批量删除</a>
+    <a lay-event="category" class="layui-btn layui-btn-sm">种类列表</a>
+    <a lay-event="out" class="layui-btn layui-btn-sm">登出</a>
+</script>
+<!--==============表头工具栏  end=================-->
+<script type="text/html" id="img">
+<img src="/three/{{d.product_image}}"/>
+</script>
+<script type="text/html" id="category">
+{{d.category.category_name}}
+</script>
+
+<!--=============展示 start===============-->
+<script type="text/javascript">
+    layui.use(['table','layer','form','laydate','upload'],function () {
+        var table = layui.table;
+        var form = layui.form;
+        var upload = layui.upload;
+        var laydate = layui.laydate;
+        var $ = layui.$;
+
+        //执行实例
+        var uploadInst = upload.render({
+            elem: '#test1' //绑定元素
+            ,url: 'product/upload' //上传接口
+            ,done: function(res){
+               $("input[name=product_image]").attr("value",res.data);
+               console.log($("input[name=product_image]").val())
+            }
+        });
+        laydate.render({
+            elem:"#pdate"
+            ,trigger: 'click' //采用click弹出
+
+        })
+        laydate.render({
+            elem:"#gdate"
+            ,trigger: 'click' //采用click弹出
+
+        })
+
+        $.ajax({
+            url:'category/select1',
+            type:'post',
+            dataType:'json',
+            success:function (r) {
+                var s='';
+                $.each(r,function (i,v) {
+                    s += "<option value='"+v.category_id+"'>"+v.category_name+"</option>";
+                })
+                $("#sel1").html(s);
+                form.render();
+            }
+        })
+        form.on('select(sel1Filter)',function (d) {
+            console.log(d)
+            $.ajax({
+                url:'category/selectById',
+                data:"id="+d.value,
+                type:'post',
+                dataType:'json',
+                success:function (r) {
+                    console.log(r)
+                    var s='';
+                    $.each(r,function (i,v) {
+                        s += "<option value='"+v.category_id+"'>"+v.category_name+"</option>";
+                    })
+                    $("#sel").html(s);
+                    form.render();
+                }
+            })
+
+        })
+        table.render({
+            elem:'#productTable',
+            url:'product/select',
+            page:true,
+            limit:10,
+            limits:[10,20,30],
+            toolbar:'#ad',
+            cols:[[
+                {type:'checkbox',width:50,fixed:"left"},
+                {title:"编号",field:"book_id",fixed:"left"},
+                {title:"种类",field:"cid",templet:"#category"},
+                {title:"书名",field:"book_name",fixed:"left",width:100},
+                {title:"价格",field:"book_price"},
+                {title:"groundingDate",field:"groundingDate"},
+                {title:"状态",field:"book_state"},
+                {title:"存货",field:"inventory"},
+                {title:"作者",field:"author"},
+                {title:"出版社",field:"press"},
+                {title:"editNum",field:"editNum"},
+                {title:"出版时间",field:"print_date"},
+                {title:"print_count",field:"print_count"},
+                {title:"ISBN",field:"isbn"},
+                {title:"字数",field:"word_count"},
+                {title:"页数",field:"page_count"},
+                {title:"开数",field:"style"},
+                {title:"纸质",field:"page"},
+                {title:"版样",field:"pack"},
+                {title:"已卖",field:"salenum"},
+                {title:"custome_score",field:"custome_score"},
+                {title:"描述",field:"recommend"},
+                {title:"信息",field:"messages"},
+                {title:"作者信息",field:"author_msg"},
+                {title:"目录",field:"list"},
+                {title:"media_comment",field:"media_comment"},
+                {title:"imagePath",field:"imagePath"},
+                {title:"series_name",field:"series_name"},
+                {title:"当当价",field:"dangprice"},
+                {title:"图片",field:"product_image",templet:"#img"},
+                {title:"操作",toolbar:"#du",fixed:"right",width:100}
+            ]]
+
+        })
+        //<!--=============展示 end===============-->
+
+        //-------------右侧工具条 start---------------------
+        table.on('tool(productfilter)',function (obj) {
+            //console.log(obj.event)
+            //console.log(obj.data)
+            if(obj.event == 'delete'){
+                layer.confirm("确定删除吗？",function (i) {
+                    $.ajax({
+                        url:'product/delete',
+                        data:"ids="+obj.data.book_id,
+                        type:'post',
+                        dataType:'json',
+                        success:function (e) {
+                            if(e.delete){
+                                layer.msg("删除成功");
+                                table.reload('productTable');
+                            }else {
+                                layer.msg("删除失败");
+                            }
+                            layer.close(i);
+                        }
+                    })
+                })
+
+            }else if(obj.event == 'update'){
+                $("#update").attr("lay-filter","update");
+                $.ajax({
+                    url:'product/selectOne',
+                    data:'id='+obj.data.book_id,
+                    type:'post',
+                    dataType:'json',
+                    success:function (e) {
+                        console.log(e)
+                        form.val("productForm", { //formTest 即 class="layui-form" 所在元素属性 lay-filter="" 对应的值
+                            "book_id":e.book_id,
+                            "cid": e.cid, // "name": "value"
+                            "book_name":e.book_name,
+                            "book_price":e.book_price,
+                            "groundingDate":e.groundingDate,
+                            "book_state":e.book_state,
+                            "inventory":e.inventory,
+                            "author":e.author,
+                            "press":e.press,
+                            "editNum":e.editNum,
+                            "print_date":e.print_date,
+                            "print_count":e.print_count,
+                            "isbn":e.isbn,
+                            "word_count":e.word_count,
+                            "page_count":e.page_count,
+                            "style":e.style,
+                            "page":e.page,
+                            "pack":e.pack,
+                            "salenum":e.salenum,
+                            "custome_score":e.custome_score,
+                            "recommend":e.recommend,
+                            "messages":e.messages,
+                            "author_msg":e.author_msg,
+                            "list":e.list,
+                            "media_comment":e.media_comment,
+                            "imagePath":e.imagePath,
+                            "series_name":e.series_name,
+                            "dangprice":e.dangprice,
+                            "product_image":e.product_image
+                        });
+                    }
+                })
+
+                layer.open({
+                    type:1,
+                    content:$("#productForm"),
+                    title:'修改',
+                    area: ['100%', '100%']
+                })
+                console.log(222222222222)
+            }
+        })
+        //-------------右侧工具条 end---------------------
+        //-------------上方工具条 start-------------------
+        table.on('toolbar(productfilter)',function (obj) {
+            if(obj.event == 'deleteMany'){
+                var checkStatus = table.checkStatus(obj.config.id);
+                var data = checkStatus.data;
+                var arr = [];
+                $(data).each(function (i,o) {
+                    arr[i] = o.book_id;
+                })
+                console.log(arr);
+                $.ajax({
+                    url:'product/delete',
+                    data:"ids="+arr,
+                    type:'post',
+                    dataType:'json',
+                    success:function (e) {
+                        if(e.delete){
+                            layer.msg("删除成功");
+                            table.reload('productTable');
+                        }else {
+                            layer.msg("删除失败");
+                        }
+                    }
+                })
+            }else if(obj.event == 'add'){
+                $("#update").attr("lay-filter","add");
+                layer.open({
+                    type:1,
+                    content:$("#productForm"),
+                    title:'添加',
+                    area: ['100%', '100%']
+                })
+            }else if(obj.event == 'category'){
+                console.log(11111111111111111)
+                window.location.href="Categorylist.jsp";
+            }else if(obj.event == 'out'){
+                window.location.href="user/out";
+            }
+
+        })
+        //-------------上方工具条 end-------------------
+        //------------给修改按钮绑定时间  start--------------------
+        form.on('submit(update)',function () {
+            //console.log($("#productForm").serialize())
+            console.log(2222222222)
+            $.ajax({
+                url:"product/update",
+                data:$("#productForm").serialize(),
+                type:'post',
+                dataType:'json',
+                success:function (e) {
+                    if(e.update) {
+                        table.reload('productTable');
+                        layer.closeAll();
+                        $("#productForm").reset();
+                        layer.msg('修改成功！')
+                    }else {
+                        layer.closeAll();
+                        layer.msg("修改失败！");
+                    }
+                }
+            })
+            return false;
+        })
+        //------------给修改按钮绑定时间  end--------------------
+        //------------给添加按钮绑定时间  start--------------------
+        form.on('submit(add)',function () {
+            console.log(1111111111)
+            console.log($("#productForm").serialize())
+            $.ajax({
+                url:'product/add',
+                type:'post',
+                data:$("#productForm").serialize(),
+                dataType:'json',
+                success:function (e) {
+                    if(e.add) {
+                        table.reload('productTable');
+                        layer.closeAll();
+                        $("#productForm")[0].reset();
+                        layer.msg('添加成功！')
+                    }else {
+                        layer.closeAll();
+                        layer.msg("添加失败！");
+                    }
+                }
+            })
+            return false;
+        })
+        //------------给添加按钮绑定时间  end--------------------
+
+    })
+</script>
+
+
+
+</body>
+</html>

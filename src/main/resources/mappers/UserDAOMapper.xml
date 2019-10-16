@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pc.dao.UserDAO">
+    <resultMap id="user_res" type="com.pc.entity.User">
+        <id property="id" column="id"/>
+        <result property="email" column="email"/>
+        <result property="nickname" column="nickname"/>
+        <result property="password" column="password"/>
+        <result property="create_data" column="create_data"/>
+        <result property="state" column="state"/>
+        <result property="authority" column="authority"/>
+    </resultMap>
+    <select id="selectByName" resultMap="user_res">
+        select * from dd_user where nickname = #{name}
+    </select>
+</mapper>
